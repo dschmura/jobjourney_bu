@@ -1,23 +1,16 @@
-%h1 Listing lists
+%h1 Lists
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th Position
-      %th
-      %th
-      %th
+.row
+  - @lists.each do |list|
+    .lists-list
+      %h5= list.name
+      -# = list.position
+      -# = link_to 'Show', list
+      -# = link_to 'Edit', edit_list_path(list)
+      -# = link_to 'Destroy', list, method: :delete, data: { confirm: 'Are you sure?' }
 
-  %tbody
-    - @lists.each do |list|
-      %tr
-        %td= list.name
-        %td= list.position
-        %td= link_to 'Show', list
-        %td= link_to 'Edit', edit_list_path(list)
-        %td= link_to 'Destroy', list, method: :delete, data: { confirm: 'Are you sure?' }
+%hr
 
-%br
+= tag.div id: :boards, data: { lists: @lists.to_json(include: :cards) }
 
 = link_to 'New List', new_list_path
